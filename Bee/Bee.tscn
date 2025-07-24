@@ -1,0 +1,103 @@
+[gd_scene load_steps=15 format=3 uid="uid://bbh0ycxmibhb5"]
+
+[ext_resource type="Script" uid="uid://dayseu2e20nip" path="res://Bee/bee.gd" id="1_d3n3a"]
+[ext_resource type="Texture2D" uid="uid://dse8reu3d6edd" path="res://Asset/Enemies/Bee/bee.png" id="1_l1cyg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d3n3a"]
+radius = 9.05539
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snk44"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(0, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ipcl"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(37, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmrc0"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(74, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xbtk"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(111, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll65n"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(148, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vifm7"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(185, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xeh7"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(222, 0, 37, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha87e"]
+atlas = ExtResource("1_l1cyg")
+region = Rect2(259, 0, 37, 39)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_twtnc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snk44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ipcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmrc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xbtk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll65n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vifm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xeh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha87e")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_snk44"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ipcl"]
+radius = 141.174
+
+[node name="Bee" type="CharacterBody2D"]
+script = ExtResource("1_d3n3a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d3n3a")
+
+[node name="Container" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Container"]
+sprite_frames = SubResource("SpriteFrames_twtnc")
+animation = &"Idle"
+frame_progress = 0.938382
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_snk44")
+
+[node name="Sight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_0ipcl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Sight" to="." method="_on_player_in_sight"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
